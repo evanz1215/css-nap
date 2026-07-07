@@ -1,0 +1,22 @@
+{
+  "extDescription": { "message": "Hold Alt and hover any element to snap and copy its CSS, Tailwind classes, and more." },
+  "onboardToast": { "message": "CSSnap: hold Alt and move your mouse to inspect elements. Alt+Click opens the CSS panel." },
+  "copied": { "message": "Copied ✓" },
+  "clickToCopyLine": { "message": "Click to copy this line" },
+  "downloadImage": { "message": "Download image" },
+  "sectionColors": { "message": "Colors" },
+  "sectionBackground": { "message": "Background / Gradient" },
+  "sectionFont": { "message": "Font" },
+  "historyTitle": { "message": "History" },
+  "historyEmpty": { "message": "No records yet" },
+  "clickToCopyRecord": { "message": "Click to copy this CSS" },
+  "clearHistory": { "message": "Clear history" },
+  "matchedRules": { "message": "Matched CSS rules" },
+  "searchPlaceholder": { "message": "Search selectors or properties..." },
+  "noRules": { "message": "No matching rules found" },
+  "navHint": { "message": "Hold Alt and press arrow keys to move to parent/child/sibling elements (within the same frame). Esc closes the panel." },
+  "copyAll": { "message": "Copy all CSS" },
+  "copyHtml": { "message": "Copy HTML" },
+  "copySubtree": { "message": "Subtree CSS" },
+  "copySubtreeTitle": { "message": "Copy CSS of this element and all descendants (up to $1$ elements)", "placeholders": { "1": { "content": "$1" } } }
+}

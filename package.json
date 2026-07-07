@@ -1,0 +1,16 @@
+{
+  "name": "cssnap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "prepare": "wxt prepare"
+  },
+  "devDependencies": {
+    "wxt": "latest",
+    "typescript": "latest"
+  }
+}

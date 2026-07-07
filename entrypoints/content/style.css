@@ -1,0 +1,252 @@
+/* Linear-inspired palette: https://github.com/VoltAgent/awesome-design-md/tree/main/design-md/linear.app */
+:host {
+  all: initial;
+  --cil-canvas: #0f1011;
+  --cil-surface-2: #141516;
+  --cil-surface-3: #18191a;
+  --cil-surface-4: #191a1b;
+  --cil-ink: #f7f8f8;
+  --cil-ink-muted: #d0d6e0;
+  --cil-ink-subtle: #8a8f98;
+  --cil-hairline: #23252a;
+  --cil-hairline-strong: #34343a;
+  --cil-accent: #5e6ad2;
+  --cil-accent-hover: #828fff;
+  --cil-success: #27a644;
+  --cil-mono: "SF Mono", Consolas, monospace;
+}
+
+.cil-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80vw;
+  padding: 10px 16px;
+  font: 13px/1.5 -apple-system, "Segoe UI", sans-serif;
+  color: var(--cil-ink);
+  background: var(--cil-canvas);
+  border: 1px solid var(--cil-accent);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  z-index: 2147483647;
+  cursor: pointer;
+}
+
+.cil-dims {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: -2px;
+  font: 600 10px/1.6 "SF Mono", Consolas, monospace;
+  color: var(--cil-ink);
+  background: var(--cil-canvas);
+  border: 1px solid var(--cil-hairline-strong);
+  border-radius: 4px;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.cil-dims-above {
+  top: auto;
+  bottom: calc(100% + 4px);
+}
+
+.cil-highlight {
+  position: fixed;
+  pointer-events: none;
+  background: rgba(94, 106, 210, 0.22);
+  border: 2px solid var(--cil-accent-hover);
+  border-radius: 2px;
+  /* dark ring for contrast on light pages, glow for contrast on dark pages */
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 0 0 4px rgba(94, 106, 210, 0.25),
+    0 0 14px rgba(94, 106, 210, 0.55);
+  z-index: 2147483647;
+  box-sizing: border-box;
+  transition: top 0.06s ease-out, left 0.06s ease-out, width 0.06s ease-out, height 0.06s ease-out;
+}
+
+.cil-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 340px;
+  overflow-y: auto;
+  background: var(--cil-canvas);
+  color: var(--cil-ink);
+  font: 12px/1.5 -apple-system, "Segoe UI", sans-serif;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.4);
+  z-index: 2147483647;
+}
+
+.cil-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  font-weight: 600;
+  font-family: var(--cil-mono);
+  border-bottom: 1px solid var(--cil-hairline);
+  background: linear-gradient(180deg, rgba(94, 106, 210, 0.12), transparent);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.cil-btn {
+  font: inherit;
+  color: var(--cil-ink-muted);
+  background: var(--cil-surface-2);
+  border: 1px solid var(--cil-hairline);
+  border-radius: 6px;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+
+.cil-btn:hover {
+  background: var(--cil-surface-4);
+  border-color: var(--cil-hairline-strong);
+  color: var(--cil-ink);
+}
+
+.cil-btn-primary {
+  color: var(--cil-ink);
+  background: rgba(94, 106, 210, 0.16);
+  border-color: var(--cil-accent);
+}
+
+.cil-btn-primary:hover {
+  background: rgba(94, 106, 210, 0.28);
+  border-color: var(--cil-accent-hover);
+}
+
+.cil-btn.cil-copied {
+  background: rgba(39, 166, 68, 0.18);
+  border-color: var(--cil-success);
+  color: var(--cil-ink);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.cil-close {
+  padding: 3px 7px;
+  border-radius: 6px;
+}
+
+.cil-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 8px solid var(--cil-surface-2);
+}
+
+.cil-download {
+  margin-left: auto;
+  padding: 0 6px;
+}
+
+.cil-history summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.cil-history summary::-webkit-details-marker {
+  display: none;
+}
+
+.cil-history-empty {
+  color: var(--cil-ink-subtle);
+  padding: 2px 4px;
+}
+
+.cil-search {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  padding: 6px 8px;
+  font: inherit;
+  color: var(--cil-ink);
+  background: var(--cil-canvas);
+  border: 1px solid var(--cil-hairline);
+  border-radius: 6px;
+}
+
+.cil-search:focus {
+  outline: none;
+  border-color: var(--cil-accent);
+}
+
+.cil-rule-block {
+  background: var(--cil-canvas);
+  border-left: 2px solid var(--cil-accent);
+  border-radius: 0 6px 6px 0;
+  padding: 4px 0 4px 8px;
+  margin-bottom: 8px;
+}
+
+.cil-rule-selector {
+  color: var(--cil-accent-hover);
+  font-family: var(--cil-mono);
+  font-weight: 600;
+  padding: 2px 4px;
+}
+
+.cil-section {
+  margin: 10px 14px;
+  padding: 10px 10px 4px;
+  background: var(--cil-surface-2);
+  border: 1px solid var(--cil-hairline);
+  border-radius: 8px;
+}
+
+.cil-section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--cil-ink-subtle);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.cil-section-title::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cil-accent);
+  flex: none;
+}
+
+.cil-prop-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-family: var(--cil-mono);
+  color: var(--cil-ink-muted);
+}
+
+.cil-prop-row:hover {
+  background: var(--cil-surface-3);
+  color: var(--cil-ink);
+}
+
+.cil-swatch {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--cil-hairline-strong);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+  background-size: cover;
+}

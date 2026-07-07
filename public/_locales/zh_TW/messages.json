@@ -1,0 +1,22 @@
+{
+  "extDescription": { "message": "按住 Alt 移到任何元素上，一鍵擷取並複製它的 CSS、Tailwind class 等。" },
+  "onboardToast": { "message": "CSSnap：按住 Alt 移動滑鼠即可檢查元素，Alt+點擊開啟 CSS 面板。" },
+  "copied": { "message": "已複製 ✓" },
+  "clickToCopyLine": { "message": "點擊複製這一行" },
+  "downloadImage": { "message": "下載圖片" },
+  "sectionColors": { "message": "顏色" },
+  "sectionBackground": { "message": "背景 / 漸層" },
+  "sectionFont": { "message": "字型" },
+  "historyTitle": { "message": "歷史紀錄" },
+  "historyEmpty": { "message": "尚無紀錄" },
+  "clickToCopyRecord": { "message": "點擊複製這筆 CSS" },
+  "clearHistory": { "message": "清空歷史" },
+  "matchedRules": { "message": "符合的 CSS 規則" },
+  "searchPlaceholder": { "message": "搜尋選擇器或屬性..." },
+  "noRules": { "message": "沒有找到符合的規則" },
+  "navHint": { "message": "按住 Alt 用方向鍵切換父層/子層/兄弟節點（僅限同一個 frame 內），Esc 關閉面板。" },
+  "copyAll": { "message": "複製全部 CSS" },
+  "copyHtml": { "message": "複製 HTML" },
+  "copySubtree": { "message": "內層 CSS" },
+  "copySubtreeTitle": { "message": "複製這個元素與所有內層元素的 CSS，最多擷取 $1$ 個元素", "placeholders": { "1": { "content": "$1" } } }
+}

@@ -1,0 +1,21 @@
+export default defineBackground(() => {
+  // 點工具列圖示 → 請當前分頁的 content script 顯示操作說明
+  browser.action.onClicked.addListener((tab) => {
+    if (tab.id) browser.tabs.sendMessage(tab.id, { type: 'show-help' }).catch(() => {
+      // 分頁沒有 content script（chrome:// 或安裝前就開著的頁面）— 忽略
+    });
+  });
+
+  browser.runtime.onMessage.addListener((message: any, _sender, sendResponse) => {
+    if (message?.type === 'download-image' && typeof message.url === 'string') {
+      browser.downloads.download({ url: message.url });
+    }
+    // content script 受 CORS 限制讀不到跨網域樣式表，改由 service worker 抓純文字回去解析
+    if (message?.type === 'fetch-css' && typeof message.url === 'string') {
+      fetch(message.url)
+        .then((r) => (r.ok ? r.text() : ''))
+        .then(sendResponse, () => sendResponse(''));
+      return true; // 非同步 sendResponse
+    }
+  });
+});
