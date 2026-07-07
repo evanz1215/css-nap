@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict';
-import { toTailwind, toStyledComponent, extractUrl, cssSelector, specificity } from './convert.js';
+import { toTailwind, toStyledComponent, extractUrl, cssSelector, specificity, pageInspect } from './convert.js';
+
+// pageInspect: non-element input returns null (DOM paths need a browser, tested manually)
+assert.equal(pageInspect(null, [], 0, 'info'), null);
+assert.equal(pageInspect({ nodeType: 3 }, [], 0, 'subtree'), null);
 
 // keyword mapping
 assert.equal(toTailwind([['display', 'flex']]), 'flex');

@@ -18,5 +18,9 @@
   "copyAll": { "message": "Copy all CSS" },
   "copyHtml": { "message": "Copy HTML" },
   "copySubtree": { "message": "Subtree CSS" },
-  "copySubtreeTitle": { "message": "Copy CSS of this element and all descendants (up to $1$ elements)", "placeholders": { "1": { "content": "$1" } } }
+  "copySubtreeTitle": { "message": "Copy CSS of this element and all descendants (up to $1$ elements)", "placeholders": { "1": { "content": "$1" } } },
+  "contextCopyCss": { "message": "Copy CSS" },
+  "contextCopyCssSubtree": { "message": "Copy CSS (with all children)" },
+  "paneSelectElement": { "message": "Select an element in the Elements panel to see its CSS." },
+  "paneComputed": { "message": "Computed style" }
 }

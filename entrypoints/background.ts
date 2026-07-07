@@ -1,4 +1,19 @@
 export default defineBackground(() => {
+  browser.runtime.onInstalled.addListener(() => {
+    browser.contextMenus.create({ id: 'copy-css', title: browser.i18n.getMessage('contextCopyCss'), contexts: ['all'] });
+    browser.contextMenus.create({ id: 'copy-css-subtree', title: browser.i18n.getMessage('contextCopyCssSubtree'), contexts: ['all'] });
+  });
+
+  // 右鍵選單 → 轉發給「被右鍵的那個 frame」的 content script 處理複製
+  browser.contextMenus.onClicked.addListener((info, tab) => {
+    if (!tab?.id || (info.menuItemId !== 'copy-css' && info.menuItemId !== 'copy-css-subtree')) return;
+    browser.tabs
+      .sendMessage(tab.id, { type: 'copy-css', subtree: info.menuItemId === 'copy-css-subtree' }, { frameId: info.frameId ?? 0 })
+      .catch(() => {
+        // 該 frame 沒有 content script（chrome:// 或安裝前就開著的頁面）— 忽略
+      });
+  });
+
   // 點工具列圖示 → 請當前分頁的 content script 顯示操作說明
   browser.action.onClicked.addListener((tab) => {
     if (tab.id) browser.tabs.sendMessage(tab.id, { type: 'show-help' }).catch(() => {

@@ -18,5 +18,9 @@
   "copyAll": { "message": "複製全部 CSS" },
   "copyHtml": { "message": "複製 HTML" },
   "copySubtree": { "message": "內層 CSS" },
-  "copySubtreeTitle": { "message": "複製這個元素與所有內層元素的 CSS，最多擷取 $1$ 個元素", "placeholders": { "1": { "content": "$1" } } }
+  "copySubtreeTitle": { "message": "複製這個元素與所有內層元素的 CSS，最多擷取 $1$ 個元素", "placeholders": { "1": { "content": "$1" } } },
+  "contextCopyCss": { "message": "複製 CSS" },
+  "contextCopyCssSubtree": { "message": "複製 CSS（含所有子層）" },
+  "paneSelectElement": { "message": "在 Elements 面板選取元素，即可查看它的 CSS。" },
+  "paneComputed": { "message": "計算後樣式" }
 }

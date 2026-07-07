@@ -1,0 +1,169 @@
+/* 與 content/style.css 同一套 Linear 風格色票；DevTools 淺色主題用 light 變數 */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f7f8;
+  --surface-hover: #eceef0;
+  --ink: #1b1c1e;
+  --ink-muted: #3c3f44;
+  --ink-subtle: #6f7680;
+  --hairline: #e1e3e6;
+  --hairline-strong: #c9ccd1;
+  --accent: #5e6ad2;
+  --accent-soft: rgba(94, 106, 210, 0.1);
+  --success: #27a644;
+  --success-soft: rgba(39, 166, 68, 0.12);
+  --mono: "SF Mono", Consolas, monospace;
+}
+
+body.dark {
+  --bg: #0f1011;
+  --surface: #141516;
+  --surface-hover: #191a1b;
+  --ink: #f7f8f8;
+  --ink-muted: #d0d6e0;
+  --ink-subtle: #8a8f98;
+  --hairline: #23252a;
+  --hairline-strong: #34343a;
+  --accent: #828fff;
+  --accent-soft: rgba(94, 106, 210, 0.16);
+  --success: #27a644;
+  --success-soft: rgba(39, 166, 68, 0.18);
+}
+
+body {
+  margin: 0;
+  font: 12px/1.5 system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  padding: 8px 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--hairline);
+}
+
+#sel {
+  display: block;
+  font: 600 12px/1.4 var(--mono);
+  color: var(--accent);
+  word-break: break-all;
+  margin-bottom: 8px;
+}
+
+#sel:empty {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+button {
+  font: inherit;
+  color: var(--ink-muted);
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+button:hover:enabled {
+  background: var(--surface-hover);
+  border-color: var(--hairline-strong);
+  color: var(--ink);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+button.primary {
+  color: var(--ink);
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+button.copied {
+  color: var(--ink);
+  background: var(--success-soft);
+  border-color: var(--success);
+  transition: background 0.15s, border-color 0.15s;
+}
+
+#preview {
+  padding: 6px 4px;
+  font: 11px/1.6 var(--mono);
+}
+
+#preview .empty {
+  padding: 8px 10px;
+  font: 12px/1.5 system-ui, sans-serif;
+  color: var(--ink-subtle);
+}
+
+.rule-block {
+  border-left: 2px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: var(--surface);
+  padding: 3px 0 3px 4px;
+  margin: 0 6px 8px;
+}
+
+.rule-sel {
+  color: var(--accent);
+  font-weight: 600;
+  padding: 1px 8px;
+  word-break: break-all;
+}
+
+.section-title {
+  font: 600 10px/1.5 system-ui, sans-serif;
+  color: var(--ink-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 8px 4px;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 1px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.row:hover {
+  background: var(--surface-hover);
+}
+
+.prop {
+  color: var(--accent);
+  flex: none;
+}
+
+.value {
+  color: var(--ink-muted);
+}
+
+.row:hover .value {
+  color: var(--ink);
+}
+
+.swatch {
+  flex: none;
+  align-self: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  border: 1px solid var(--hairline-strong);
+}

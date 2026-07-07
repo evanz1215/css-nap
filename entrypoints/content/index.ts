@@ -1,25 +1,7 @@
 import './style.css';
-import { toTailwind, toStyledComponent, extractUrl, cssSelector, specificity } from './convert.js';
+import { toTailwind, toStyledComponent, extractUrl, cssSelector, specificity, PROPS, SUBTREE_LIMIT } from './convert.js';
 
 const t = (...args: Parameters<typeof browser.i18n.getMessage>) => browser.i18n.getMessage(...args);
-
-// ponytail: curated property list instead of full getComputedStyle() diffing
-// (300+ props, mostly defaults). Upgrade to a diff-against-blank-element
-// approach if the fixed list turns out to miss properties people need.
-const PROPS = [
-  'display', 'position', 'top', 'right', 'bottom', 'left', 'z-index',
-  'width', 'height', 'box-sizing',
-  'margin-top', 'margin-right', 'margin-bottom', 'margin-left',
-  'padding-top', 'padding-right', 'padding-bottom', 'padding-left',
-  'border-width', 'border-style', 'border-color', 'border-radius',
-  'color', 'background-color', 'background-image',
-  'font-family', 'font-size', 'font-weight', 'font-style', 'line-height',
-  'letter-spacing', 'text-align', 'text-decoration-line', 'text-transform',
-  'white-space', 'overflow',
-  'box-shadow', 'opacity', 'cursor',
-  'flex-direction', 'justify-content', 'align-items', 'gap',
-  'transform', 'transition',
-];
 const COLOR_PROPS = ['color', 'background-color'];
 const BG_PROPS = ['background-image'];
 const FONT_PROPS = ['font-family', 'font-size', 'font-weight', 'font-style', 'line-height', 'letter-spacing'];
@@ -122,9 +104,6 @@ async function gatherMatchedRuleBlocks(el: Element): Promise<MatchedRuleBlock[]>
   return blocks;
 }
 
-// ponytail: capped to avoid freezing the tab / clipboard on huge subtrees.
-const SUBTREE_LIMIT = 300;
-
 function collectSubtreeCss(root: Element): string {
   const elements = [root, ...Array.from(root.querySelectorAll('*'))].slice(0, SUBTREE_LIMIT);
   return elements
@@ -203,22 +182,36 @@ export default defineContentScript({
     });
     ui.mount();
 
-    function showHelpToast() {
-      toast.textContent = t('onboardToast');
+    function showToast(text: string, ms = 8000) {
+      toast.textContent = text;
       toast.hidden = false;
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => (toast.hidden = true), 8000);
+      toastTimer = setTimeout(() => (toast.hidden = true), ms);
     }
 
     // 首次安裝引導：只在 top frame、只顯示一次
     if (isTop && !(await onboardedItem.getValue())) {
-      showHelpToast();
+      showToast(t('onboardToast'));
       onboardedItem.setValue(true);
     }
 
-    // 點工具列圖示 → background 轉發過來的說明請求
+    // 右鍵選單「複製 CSS」的目標：記下最後一次右鍵點到的元素
+    let lastContextTarget: Element | null = null;
+    document.addEventListener('contextmenu', (e) => {
+      const first = e.composedPath()[0];
+      lastContextTarget = first instanceof Element && !ui.shadowHost.contains(first) ? first : null;
+    }, true);
+
     browser.runtime.onMessage.addListener((message: any) => {
-      if (message?.type === 'show-help' && isTop) showHelpToast();
+      // 點工具列圖示 → background 轉發過來的說明請求
+      if (message?.type === 'show-help' && isTop) showToast(t('onboardToast'));
+      // 右鍵選單 → background 送到本 frame 的複製請求
+      if (message?.type === 'copy-css' && lastContextTarget) {
+        const el = lastContextTarget;
+        const css = message.subtree ? collectSubtreeCss(el) : formatCss(collectStyles(el));
+        navigator.clipboard.writeText(css);
+        showToast(t('copied'), 1500);
+      }
     });
 
     function elementUnderPoint(x: number, y: number): Element | null {
